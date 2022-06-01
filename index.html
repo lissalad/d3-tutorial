@@ -11,16 +11,35 @@
     <script>
       d3.select("body")
         .selectAll("div")
-        .data([5, 6, 2, 8, 4, 9, 1])
+        .data(randomDigitList(20))
         .enter()
         .append("div") // append some divs
         .text((d) => d)
         .text((d) => `$${d.toFixed(2)}`) // Format the numbers
 
         .style("padding", "1em") // padding: 1em
-        .style("background-color", "red") // background-color: red
+        .style("background-color", "#65B6A8")
+        .style('color', 'black')
+        .style('filter', (d) => `brightness(${d * 6 + 80}%)` )
+        // .style('filter', 'contrast(70%)' )
+
         .style("margin", "1px") // margin: 1px
         .style('width', (d) => `${d / 10 * 100}%`) // set width based on data
+
+
+        // random array of single digit numbers of a given length
+        function randomDigitList(length) {
+          let list = [];
+          for (let i=0; i < length; i+=1 ) {
+            list.push(Math.random() * 9);
+          }
+          console.log(list);
+          return list;
+        }
+
+        function endGradient(d) {
+          
+        }
 
     </script>
   </body>
