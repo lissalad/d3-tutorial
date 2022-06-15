@@ -7,15 +7,17 @@
     <title>d3 tutorial cities</title>
   </head>
   <body>
-    <svg id="svg" width="500" height="500"></svg>
+    <svg id="svg" width="800" height="500"></svg>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
       d3.csv("/data/cities.csv").then((data) => {
-        console.log(data);
-      });
+        // Create a linear scale
+        const xScale = d3
+          .scaleLinear()
+          .domain([-150, 150]) // Set the domain
+          .range([0, 800]);
 
-      d3.csv("/data/cities.csv").then((data) => {
         // console.log(data)
         d3.select("#svg")
           .style("border", "1px solid")
@@ -24,7 +26,7 @@
           .data(data)
           .enter()
           .append("circle")
-          .attr("cx", (d) => parseFloat(d.x) * 2 + 250)
+          .attr("cx", (d) => xScale(d.x)) // scale x with xScale
           .attr("cy", (d) => parseFloat(d.y) * 2 + 250)
           .attr("r", 20)
           .attr("fill", `red`)
